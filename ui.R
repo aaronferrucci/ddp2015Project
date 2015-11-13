@@ -13,7 +13,7 @@ useful_names = c(
   )
 fluidPage(
 
-  titlePanel("Wharf to Wharf 2015 Linear Model Explorer"),
+  titlePanel("Wharf to Wharf 2015 Explorer"),
 
 #  sidebarPanel(
 #    checkboxInput('age', 'Age'),
@@ -23,30 +23,18 @@ fluidPage(
 
   fluidRow(
     tabsetPanel(
-      tabPanel("README", "abcde"),
-      tabPanel("test",
+      tabPanel("Documentation", "abcde"),
+      tabPanel("Data Exploration", 
         fluidRow(
-          column(2, "sidebar"),
-          column(10, "main")
-        )
-      ),
-      tabPanel("test2",
-        fluidRow(
-          column(2, "sidebar"),
-          column(10, "main")
-        )
-      ),
-      tabPanel("Plot", 
-        fluidRow(
-          column(4, offset=1,
+          column(3, offset=1,
             selectInput('x', 'X', useful_names, "age"),
             selectInput('y', 'Y', useful_names, "elapsed"),
             selectInput('col', 'Color', useful_names, "sex")
           ),
-          column(7, plotOutput('plot'))
+          column(8, plotOutput('plot'))
         )
       ),
-      tabPanel("Model", "modelmodel")
+      tabPanel("Linear Modeling", "modelmodel")
     )
   )
 )
