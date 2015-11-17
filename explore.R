@@ -18,15 +18,5 @@ timestr <- function(elapsed) {
   return(time)
 }
 
+allData <- read.csv("data/clean.csv", stringsAsFactors=F)
 
-allData <- read.csv("data/w2w2015.csv", stringsAsFactors=F)
-allData$sex <- as.factor(allData$sex)
-allData[allData$country == "UMI", c("country")] <- c("USA")
-
-allData[allData$country == "", c("country")] <- allData[allData$country == "", c("city")]
-allData[grepl("^KEN", allData$country), c("country")] <- c("KEN")
-allData[grepl("^ERI", allData$country), c("country")] <- c("ERI")
-allData <- dplyr::filter(allData, age >= 5)
-
-allData <- dplyr::filter(allData, elapsed < 2.75 * 3600 * 1000)
-allData <- dplyr::filter(allData, start > 30090000)
