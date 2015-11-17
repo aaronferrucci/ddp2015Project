@@ -56,17 +56,34 @@ tristique senectus et netus et malesuada fames ac turpis egestas."
           )
         )
       ),
+# To do: provide summary info, maybe for the y axis variable? I have some
+# unused space.
       tabPanel("Data Exploration", 
         fluidRow(
           br(),
           column(3, offset=1,
             selectInput('x', 'X', useful_names, "age"),
             selectInput('y', 'Y', useful_names, "elapsed"),
-            selectInput('col', 'Color', useful_names, "sex")
+            selectInput('col', 'Color', useful_names, "sex"),
+            selectInput(
+              'max_rank',
+              'Limit to rank',
+              c(
+                100,
+                seq(1000, 13000, 1000),
+                max(dataset$overall)
+              ),
+              max(dataset$overall)
+            )
           ),
           column(8, plotOutput('plot'))
         )
       ),
+# To do: choose y ~ a + b + c (at least one, at most three covariates)
+# Provide a graph of y ~ a, with error bands or other statistics
+# Provide R^2, and an explanation of its meaning.
+# Some explanatory text, for example if I'm modeling bib# ~ start, what
+# does that mean, if anything?
       tabPanel("Modeling",
         "modelmodel"
       )

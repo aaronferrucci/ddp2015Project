@@ -1,9 +1,10 @@
 library(shiny)
 library(ggplot2)
-elapsed_ticks <- seq(0, max(dataset$elapsed), 900000)
 hours_to_ms <- function(hours) {
   return(hours * 3600 * 1000)
 }
+
+elapsed_ticks <- seq(0, max(dataset$elapsed), 900000)
 start_ticks <- seq(hours_to_ms(8.5), max(dataset$start), hours_to_ms(2.5/60))
 
 timestr <- function(elapsed) {
@@ -25,19 +26,9 @@ timestr <- function(elapsed) {
 
 function(input, output) {
   output$plot <- renderPlot({
-#    fit <- switch(
-#      1 + 4 * input$age + 2 * input$sex + 1 * input$start,
-#      NULL, # 0
-#      lm(elapsed ~ start, data=dataset), # 1
-#      lm(elapsed ~ sex, data=dataset), # 2
-#      lm(elapsed ~ sex + start, data=dataset), # 3
-#      lm(elapsed ~ age, data=dataset), # 4
-#      lm(elapsed ~ age + start, data=dataset), # 5
-#      lm(elapsed ~ age + sex, data=dataset), # 6
-#      lm(elapsed ~ age + sex + start, data=dataset) # 7
-#    )
-
-    p <- ggplot(dataset, aes_string(x=input$x, y=input$y, col=input$col)) + geom_point()
+    select_data <- dataset[dataset$overall <= as.numeric(input$max_rank),]
+    p <- ggplot(select_data, aes_string(x=input$x, y=input$y, col=input$col)) +
+      geom_point()
 
     # Format an "age" axis.
     if (input$x == "age") {
@@ -46,6 +37,8 @@ function(input, output) {
     if (input$y == "age") {
       p <- p + scale_y_continuous(breaks = seq(0, 100, 10))
     }
+
+    # Format the "elapsed time" axis.
     if (input$x == "elapsed") {
       p <- p + scale_x_continuous(
         breaks = elapsed_ticks,
@@ -60,6 +53,8 @@ function(input, output) {
         name = "elapsed time (h:mm:ss)"
       )
     }
+
+    # Format the "start time" axis"
     if (input$x == "start") {
       p <- p + scale_x_continuous(
         breaks = start_ticks,
