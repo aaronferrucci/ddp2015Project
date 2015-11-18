@@ -24,9 +24,38 @@ timestr <- function(elapsed) {
   return(time)
 }
 
+title_part <- function(label)
+{
+  part <- switch(label,
+    elapsed = "Elapsed Time",
+    start = "Start Time",
+    bib = "Bib #",
+    overall = "Overall Ranking",
+    oversex = "Overal Ranking by Sex",
+    country = "Country",
+    age = "Age",
+    label)
+  return(part)
+}
+
+title_string <- function(ylabel, xlabel)
+{
+  title_y <- title_part(ylabel)
+  title_x <- title_part(xlabel)
+  return(sprintf("%s vs. %s", title_y, title_x))
+}
+
 function(input, output) {
   output$plot <- renderPlot({
     select_data <- dataset[dataset$overall <= as.numeric(input$max_rank),]
+
+    title_y <- input$y
+    title_x <- input$x
+    elapsed_label <- "Elapsed Time"
+    start_label <- "Start Time"
+    age_label <- "Age"
+    bib_label <- "Bib Number"
+
     p <- ggplot(select_data, aes_string(x=input$x, y=input$y, col=input$col))
     p <- p + geom_point()
 
@@ -40,6 +69,7 @@ function(input, output) {
 
     # Format the "elapsed time" axis.
     if (input$x == "elapsed") {
+      title_x <- elapsed_label
       p <- p + scale_x_continuous(
         breaks = elapsed_ticks,
         labels = timestr(elapsed_ticks),
@@ -47,6 +77,7 @@ function(input, output) {
       )
     }
     if (input$y == "elapsed") {
+      title_y <- elapsed_label
       p <- p + scale_y_continuous(
         breaks = elapsed_ticks,
         labels = timestr(elapsed_ticks),
@@ -56,6 +87,7 @@ function(input, output) {
 
     # Format the "start time" axis"
     if (input$x == "start") {
+      title_x <- start_label
       p <- p + scale_x_continuous(
         breaks = start_ticks,
         labels = timestr(start_ticks),
@@ -63,12 +95,14 @@ function(input, output) {
       ) + expand_limits(x = hours_to_ms(8.5))
     }
     if (input$y == "start") {
+      title_y <- start_label
       p <- p + scale_y_continuous(
         breaks = start_ticks,
         labels = timestr(start_ticks),
         name = "start time (AM)"
       ) + expand_limits(y = hours_to_ms(8.5))
     }
+    p <- p + ggtitle(title_string(input$y, input$x))
 
     print(p)
 
@@ -130,6 +164,10 @@ function(input, output) {
         name = "start time (AM)"
       ) + expand_limits(y = hours_to_ms(8.5))
     }
+    p <- p + ggtitle(sprintf("%s, model: %s",
+      title_string(input$outcome, input$cov1),
+      formula_string
+    ))
 
     print(p)
   }, height=600)

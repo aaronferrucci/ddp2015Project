@@ -11,15 +11,9 @@ useful_names = c(
   "sex",
   "start time" = "start"
   )
+
 fluidPage(
-
   titlePanel("Wharf to Wharf 2015 Explorer"),
-
-#  sidebarPanel(
-#    checkboxInput('age', 'Age'),
-#    checkboxInput('sex', 'Sex'),
-#    checkboxInput('start', 'Start Time')
-#  ),
 
   fluidRow(
     tabsetPanel(
@@ -90,7 +84,7 @@ tristique senectus et netus et malesuada fames ac turpis egestas."
           column(3, offset=1,
             selectInput('outcome', 'Outcome', useful_names, "elapsed"),
             selectInput('cov1', 'Covariate 1', useful_names, "age"),
-            selectInput('cov2', 'Covariate 2', c(useful_names, "None"), "sex"),
+            selectInput('cov2', 'Covariate 2', c("None", useful_names), "sex"),
             selectInput(
               'max_rank2',
               'Limit to rank',
