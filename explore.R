@@ -18,5 +18,15 @@ timestr <- function(elapsed) {
   return(time)
 }
 
-allData <- read.csv("data/clean.csv", stringsAsFactors=F)
+      # geom_abline(col = "red", intercept = model$coef[1], slope = model$coef[2]) +
+dataset <- read.csv("data/clean.csv", stringsAsFactors=F)
+select_data <- dataset[dataset$overall <= 1000,]
+fmla <- as.formula(paste0("elapsed", " ~ ", "age + sex"))
+model <- lm(fmla, data=select_data)
+pred <- data.frame(predict(model, interval = ("prediction")))
+allDat <- cbind(select_data, pred)
+p <- ggplot(allDat, aes_string(x="age", y="elapsed")) +
+      geom_point(aes_string(col = "sex")) +
+      geom_line(aes(x=age, y=fit)) +
+      geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.2)
 

@@ -62,8 +62,8 @@ tristique senectus et netus et malesuada fames ac turpis egestas."
         fluidRow(
           br(),
           column(3, offset=1,
-            selectInput('x', 'X', useful_names, "age"),
             selectInput('y', 'Y', useful_names, "elapsed"),
+            selectInput('x', 'X', useful_names, "age"),
             selectInput('col', 'Color', useful_names, "sex"),
             selectInput(
               'max_rank',
@@ -85,7 +85,25 @@ tristique senectus et netus et malesuada fames ac turpis egestas."
 # Some explanatory text, for example if I'm modeling bib# ~ start, what
 # does that mean, if anything?
       tabPanel("Modeling",
-        "modelmodel"
+        fluidRow(
+          br(),
+          column(3, offset=1,
+            selectInput('outcome', 'Outcome', useful_names, "elapsed"),
+            selectInput('cov1', 'Covariate 1', useful_names, "age"),
+            selectInput('cov2', 'Covariate 2', c(useful_names, "None"), "sex"),
+            selectInput(
+              'max_rank2',
+              'Limit to rank',
+              c(
+                100,
+                seq(1000, 13000, 1000),
+                max(dataset$overall)
+              ),
+              1000 
+            )
+          ),
+          column(8, plotOutput('plot2'))
+        )
       )
     )
   )
