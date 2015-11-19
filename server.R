@@ -108,22 +108,32 @@ function(input, output) {
 
   }, height=600)
 
-  output$plot2 <- renderPlot({
-    select_data <- dataset[dataset$overall <= as.numeric(input$max_rank2),]
-    formula_string = paste0(input$outcome, " ~ ", input$cov1)
+  select_data <- reactive({
+    dataset[dataset$overall <= as.numeric(input$max_rank2),]
+  })
+
+  formula_string <- reactive({
+    fs <- paste0(input$outcome, " ~ ", input$cov1)
     if (input$cov2 != "None")
-      formula_string = paste0(formula_string, " + ", input$cov2)
-    fmla <- as.formula(formula_string)
-    model <- lm(fmla, data=select_data)
-    pred <- data.frame(predict(model, interval = ("prediction")))
-    allDat <- cbind(select_data, pred)
+      fs = paste0(fs, " + ", input$cov2)
+    fs
+  })
+
+  model <- reactive({
+    fmla <- as.formula(formula_string())
+    lm(fmla, data=select_data())
+  })
+
+  output$plot2 <- renderPlot({
+    pred <- data.frame(predict(model(), interval = ("prediction")))
+    allDat <- cbind(select_data(), pred)
     p <- ggplot(allDat, aes_string(x=input$cov1, y=input$outcome))
     if (input$cov2 == "None")
       p <- p + geom_point()
     else
       p <- p + geom_point(aes_string(col=input$cov2))
     p <- p + geom_line(aes_string(x=input$cov1, y="fit"))
-    p <- p + geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.2)
+    # p <- p + geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.2)
 
     # Format an "age" axis.
     if (input$cov1 == "age") {
@@ -166,11 +176,14 @@ function(input, output) {
     }
     p <- p + ggtitle(sprintf("%s, model: %s",
       title_string(input$outcome, input$cov1),
-      formula_string
+      formula_string()
     ))
 
     print(p)
   }, height=600)
 
+  output$modelSummary <- renderPrint({
+    paste0("R Squared: ", summary(model())$r.squared)
+  })
 }
 

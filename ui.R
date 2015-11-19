@@ -21,32 +21,24 @@ fluidPage(
         fluidRow(
           br(),
           column(8, offset=2,
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare viverra
-eros, et gravida mauris ornare in. Fusce in ex aliquam, vestibulum tortor non,
-dapibus lectus. Nunc eget placerat risus, a euismod arcu. Maecenas non sem quis
-justo venenatis vestibulum tempor et libero. Aenean pharetra aliquet blandit.
-Integer eros massa, accumsan sit amet neque et, pretium dictum urna. Mauris
-aliquet, velit vel suscipit varius, neque orci aliquam urna, vel convallis
-nulla justo vitae quam. Mauris ac velit est.",
+"The Wharf to Wharf race happens every July in Santa Cruz. The mostly flat,
+6-mile course hugs the coastline between Santa Cruz and Capitola. The 
+race has grown in popularity since its beginning in 1973, with more than 13,000
+registered participants in 2015.",
 br(),
 br(),
-"Quisque ante massa, semper id magna ac, semper hendrerit risus. Mauris commodo
-lectus vestibulum, consectetur neque non, gravida dolor. Nulla id lacus
-venenatis, mattis lectus quis, gravida massa. Ut elementum posuere nunc a
-tempor. Integer ac condimentum quam. Maecenas suscipit consectetur justo, sed
-pretium mi. Etiam ut nulla odio. Ut quis aliquet urna, eget venenatis ex.
-Aliquam lobortis augue risus, vitae vulputate tortor ullamcorper id. Aliquam
-nisi nisi, auctor a pellentesque quis, facilisis sit amet mi.",
+"Race results are available online. You
+can look up runners' results by bib number, name, city and state. This
+is ok, but it's not very handy for anyone wanting to do real data analysis.",
 br(),
 br(),
-"Fusce varius diam ac velit porta, sit amet vulputate nibh congue. Sed
-tristique ullamcorper nisl, non tempus est vestibulum tincidunt. Quisque
-faucibus sapien lorem, non tempor dolor ullamcorper vel. Aliquam diam eros,
-feugiat eu nunc eget, egestas vulputate dui. Proin dignissim eu leo non
-imperdiet. Sed volutpat at felis eget tempus. In non nibh et mauris interdum
-varius. Vestibulum porttitor rhoncus mattis. Sed vel nibh in lacus iaculis
-semper. Aenean accumsan ornare augue id fermentum. Pellentesque habitant morbi
-tristique senectus et netus et malesuada fames ac turpis egestas."
+"This web application facilitates analysis of the 2015 race results. On the 
+'Data Exploration' tab, you can explore the data in a plot, with free choice of
+variables for X and Y axes, and color. You can also limit the displayed data 
+those under a specific overall rank. On the 'Modeling' tab, you can choose 
+variables to be applied as predictor and outcome. For example, how well can we
+predict elapsed time by using age and sex as covariates? The race data are
+displayed in a plot, along with the predicted fit values."
           )
         )
       ),
@@ -94,7 +86,8 @@ tristique senectus et netus et malesuada fames ac turpis egestas."
                 max(dataset$overall)
               ),
               1000 
-            )
+            ),
+            verbatimTextOutput("modelSummary")
           ),
           column(8, plotOutput('plot2'))
         )
