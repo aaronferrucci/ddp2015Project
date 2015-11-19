@@ -104,86 +104,14 @@ function(input, output) {
     }
     p <- p + ggtitle(title_string(input$y, input$x))
 
+    if (input$jitter)
+      p <- p + geom_jitter()
+
+    if (input$smooth)
+      p <- p + stat_smooth(method = "lm", formula = y ~ x)
     print(p)
 
   }, height=600)
 
-  select_data <- reactive({
-    dataset[dataset$overall <= as.numeric(input$max_rank2),]
-  })
-
-  formula_string <- reactive({
-    fs <- paste0(input$outcome, " ~ ", input$cov1)
-    if (input$cov2 != "None")
-      fs = paste0(fs, " + ", input$cov2)
-    fs
-  })
-
-  model <- reactive({
-    fmla <- as.formula(formula_string())
-    lm(fmla, data=select_data())
-  })
-
-  output$plot2 <- renderPlot({
-    pred <- data.frame(predict(model(), interval = ("prediction")))
-    allDat <- cbind(select_data(), pred)
-    p <- ggplot(allDat, aes_string(x=input$cov1, y=input$outcome))
-    if (input$cov2 == "None")
-      p <- p + geom_point()
-    else
-      p <- p + geom_point(aes_string(col=input$cov2))
-    p <- p + geom_line(aes_string(x=input$cov1, y="fit"))
-    # p <- p + geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.2)
-
-    # Format an "age" axis.
-    if (input$cov1 == "age") {
-      p <- p + scale_x_continuous(breaks = seq(0, 100, 10))
-    } 
-    if (input$outcome == "age") {
-      p <- p + scale_y_continuous(breaks = seq(0, 100, 10))
-    }
-
-    # Format the "elapsed time" axis.
-    if (input$cov1 == "elapsed") {
-      p <- p + scale_x_continuous(
-        breaks = elapsed_ticks,
-        labels = timestr(elapsed_ticks),
-        name = "elapsed time (h:mm:ss)"
-      )
-    }
-    if (input$outcome == "elapsed") {
-      p <- p + scale_y_continuous(
-        breaks = elapsed_ticks,
-        labels = timestr(elapsed_ticks),
-        name = "elapsed time (h:mm:ss)"
-      )
-    }
-
-    # Format the "start time" axis"
-    if (input$cov1 == "start") {
-      p <- p + scale_x_continuous(
-        breaks = start_ticks,
-        labels = timestr(start_ticks),
-        name = "start time (AM)"
-      ) + expand_limits(x = hours_to_ms(8.5))
-    }
-    if (input$outcome == "start") {
-      p <- p + scale_y_continuous(
-        breaks = start_ticks,
-        labels = timestr(start_ticks),
-        name = "start time (AM)"
-      ) + expand_limits(y = hours_to_ms(8.5))
-    }
-    p <- p + ggtitle(sprintf("%s, model: %s",
-      title_string(input$outcome, input$cov1),
-      formula_string()
-    ))
-
-    print(p)
-  }, height=600)
-
-  output$modelSummary <- renderPrint({
-    paste0("R Squared: ", summary(model())$r.squared)
-  })
 }
 
