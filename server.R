@@ -105,8 +105,7 @@ function(input, output) {
     p <- p + ggtitle(title_string(input$y, input$x))
 
     if (input$jitter)
-      p <- p + geom_jitter()
-
+      p <- p + geom_jitter(position = position_jitter(w=.1,h=.1))
     if (input$smooth)
       p <- p + stat_smooth(method = "lm", formula = y ~ x)
     print(p)
