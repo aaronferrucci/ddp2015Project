@@ -2,18 +2,72 @@
 /* Your other css */
 
 .section .reveal .state-background {
-    background: url("WTWposter2015_Official.jpg");
+    background: url("images/WTWposter2015_Official.png");
+    background-color: #cccccc;
     background-position: center center;
-    background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 .section .reveal h1,
 .section .reveal h2,
-.section .reveal h3,
-.section .reveal h4,
 .section .reveal p {
+  color: black;
+}
+
+.slide2 .reveal .state-background {
+    background: url("images/WTWposter2.png");
+    background-color: #cccccc;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.slide2 .reveal h1,
+.slide2 .reveal h2,
+.slide2 .reveal p {
+  color: black;
+}
+
+.slide3 .reveal .state-background {
+    background: url("images/WTWposter3.png");
+    background-color: #cccccc;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.slide3 .reveal h1,
+.slide3 .reveal h2,
+.slide3 .reveal p {
+  color: black;
+}
+
+.slide4 .reveal .state-background {
+    background: url("images/WTWposter4.png");
+    background-color: #cccccc;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.slide4 .reveal h1,
+.slide4 .reveal h2,
+.slide4 .reveal p {
+  color: black;
+}
+
+.slide5 .reveal .state-background {
+    background: url("images/WTWposter5.png");
+    background-color: #cccccc;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.slide5 .reveal h1,
+.slide5 .reveal h2,
+.slide5 .reveal p {
   color: black;
 }
 </style>
@@ -27,6 +81,7 @@ date: `r format(Sys.time(), "%a %b %d %Y")`
 
 Race Data!
 ========================================================
+type: slide2
 ``` {r echo=F}
 dataset <- read.csv("data/clean.csv")
 num_runners <- nrow(dataset)
@@ -40,7 +95,7 @@ num_runners <- nrow(dataset)
 
 You control the X, you control the Y. Also color.
 ========================================================
-
+type: slide3
 * On the left-hand side of the app you can choose the X and Y variables
 of the plot. A third drop-down list specifies which variable controls color.
 
@@ -50,7 +105,7 @@ of the plot. A third drop-down list specifies which variable controls color.
 
 Jitter & Smoothing
 ========================================================
-
+type: slide4
 * One checkbox enables jitter in the plotted data points.
   * This is handy when one of the axes is a factor variable (country or sex). You can easily see if the foreign runners are mostly men, mostly women, or a mix.
 
@@ -60,7 +115,7 @@ Jitter & Smoothing
 
 Summary and Future Work
 ========================================================
-
+type: slide5
 * The Wharf to Wharf 2015 Explorer enables easy exploration of this data set,
 with no need to type any code. 
 
