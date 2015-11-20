@@ -1,0 +1,68 @@
+<style>
+/* Your other css */
+
+.section .reveal .state-background {
+    background: url("WTWposter2015_Official.jpg");
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.section .reveal h1,
+.section .reveal h2,
+.section .reveal h3,
+.section .reveal h4,
+.section .reveal p {
+  color: black;
+}
+</style>
+
+Data Exploration: Wharf to Wharf 2015 Results 
+========================================================
+author: Aaron Ferrucci
+autosize: true
+date: `r format(Sys.time(), "%a %b %d %Y")`
+
+
+Race Data!
+========================================================
+``` {r echo=F}
+dataset <- read.csv("data/clean.csv")
+num_runners <- nrow(dataset)
+```
+
+* `r num_runners` runners participated in the 2015 Wharf to Wharf race, and the results are online, but only in a [rather inconvenient  form](http://results.xacte.com/?kw=wtw).
+
+* If you were curious about the distribution of runner elapsed time, as a function of age and sex, you were out of luck... until now.
+
+* The Wharf to Wharf 2015 Explorer enables easy exploration of the data, in one handy chart.
+
+You control the X, you control the Y. Also color.
+========================================================
+
+* On the left-hand side of the app you can choose the X and Y variables
+of the plot. A third drop-down list specifies which variable controls color.
+
+* Are you wondering if the faster runners have lower bib numbers? Then plot elapsed time vs. bib#. (Answer: sort of.)
+
+* Are you wondering if the average foreigner got an earlier start time than the average American? Try plotting start time vs. country. (Answer, yes, it seems so. Well, they didn't come all this way to sleep in and miss the start of the race.)
+
+Jitter & Smoothing
+========================================================
+
+* One checkbox enables jitter in the plotted data points.
+  * This is handy when one of the axes is a factor variable (country or sex). You can easily see if the foreign runners are mostly men, mostly women, or a mix.
+
+* A second checkbox enables smoothing. With this option turned on, trends in the data are easier to spot. 
+  * For example, among the top 100 runners, female runners appear to run faster, the older they are, but for men, it's the reverse. (X: age, Y: elapsed time, limit to rank: 100, enable smoother).
+  * Since there are few women in this subset of the data, the age thing is probably statistically meaningless.
+
+Summary and Future Work
+========================================================
+
+* The Wharf to Wharf 2015 Explorer enables easy exploration of this data set,
+with no need to type any code. 
+
+* Future effort can apply the same treatment to earlier Wharf to Wharf race results.
+
