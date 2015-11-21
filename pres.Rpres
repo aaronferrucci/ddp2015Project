@@ -78,8 +78,7 @@ author: Aaron Ferrucci
 autosize: true
 date: `r format(Sys.time(), "%a %b %d %Y")`
 
-
-Race Data!
+Explore the Race!
 ========================================================
 type: slide2
 ``` {r echo=F}
