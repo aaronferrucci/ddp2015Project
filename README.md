@@ -7,3 +7,5 @@ Wharf to Wharf race in Santa Cruz, CA.
 The pitch presentation is available here:
 https://aaronferrucci.github.io/ddp2015Project/
 
+The app is hosted on shinyapps.io, here:
+https://aaronferrucci.shinyapps.io/w2w2015
