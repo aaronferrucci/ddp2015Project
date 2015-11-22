@@ -99,8 +99,6 @@ type: slide3
 * On the left-hand side of the app you can choose the X and Y variables
 of the plot. A third drop-down list specifies which variable controls color.
 
-* Do faster runners have lower bib numbers? Try plotting elapsed time vs. bib number.
-
 * Do runners with an earlier start time finish the race faster? Try plotting start time vs. elapsed time.
 
 * Did the average foreigner get an earlier start time than the average American? Plot start time vs. country.
