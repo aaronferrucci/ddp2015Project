@@ -810,8 +810,13 @@ hljs.initHighlightingOnLoad();
 <ul>
 <li><p>On the left-hand side of the app you can choose the X and Y variables
 of the plot. A third drop-down list specifies which variable controls color.</p></li>
-<li><p>Are you wondering if the faster runners have lower bib numbers? Then plot elapsed time vs. bib#. (Answer: sort of.)</p></li>
-<li><p>Are you wondering if the average foreigner got an earlier start time than the average American? Try plotting start time vs. country. (Answer, yes, it seems so. Well, they didn&#39;t come all this way to sleep in and miss the start of the race.)</p></li>
+<li><p>Do faster runners have lower bib numbers? Try plotting elapsed time vs. bib number.</p></li>
+<li><p>Do runners with an earlier start time finish the race faster? Try plotting start time vs. elapsed time.</p></li>
+<li><p>Did the average foreigner get an earlier start time than the average American? Plot start time vs. country.</p>
+
+<ul>
+<li>Set color to &ldquo;sex&rdquo;, and you&#39;ll see an interesting effect: all the Ethiopian runners were female, while the Japanese, Eritrean and Japanese runners were all male. (Runners from Kenya and the USA are of both genders.)</li>
+</ul></li>
 </ul>
 
 </div>
@@ -824,13 +829,12 @@ of the plot. A third drop-down list specifies which variable controls color.</p>
 <li><p>One checkbox enables jitter in the plotted data points.</p>
 
 <ul>
-<li>This is handy when one of the axes is a factor variable (country or sex). You can easily see if the foreign runners are mostly men, mostly women, or a mix.</li>
+<li>This is handy when one of the axes is a factor variable (country or sex).</li>
 </ul></li>
 <li><p>A second checkbox enables smoothing. With this option turned on, trends in the data are easier to spot. </p>
 
 <ul>
 <li>For example, among the top 100 runners, female runners appear to run faster, the older they are, but for men, it&#39;s the reverse. (X: age, Y: elapsed time, limit to rank: 100, enable smoother).</li>
-<li>Since there are few women in this subset of the data, the age thing is probably statistically meaningless.</li>
 </ul></li>
 </ul>
 

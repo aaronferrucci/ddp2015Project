@@ -99,19 +99,21 @@ type: slide3
 * On the left-hand side of the app you can choose the X and Y variables
 of the plot. A third drop-down list specifies which variable controls color.
 
-* Are you wondering if the faster runners have lower bib numbers? Then plot elapsed time vs. bib#. (Answer: sort of.)
+* Do faster runners have lower bib numbers? Try plotting elapsed time vs. bib number.
 
-* Are you wondering if the average foreigner got an earlier start time than the average American? Try plotting start time vs. country. (Answer, yes, it seems so. Well, they didn't come all this way to sleep in and miss the start of the race.)
+* Do runners with an earlier start time finish the race faster? Try plotting start time vs. elapsed time.
+
+* Did the average foreigner get an earlier start time than the average American? Plot start time vs. country.
+  * Set color to "sex", and you'll see an interesting effect: all the Ethiopian runners were female, while the Japanese, Eritrean and Japanese runners were all male. (Runners from Kenya and the USA are of both genders.)
 
 Jitter & Smoothing
 ========================================================
 type: slide4
 * One checkbox enables jitter in the plotted data points.
-  * This is handy when one of the axes is a factor variable (country or sex). You can easily see if the foreign runners are mostly men, mostly women, or a mix.
+  * This is handy when one of the axes is a factor variable (country or sex).
 
 * A second checkbox enables smoothing. With this option turned on, trends in the data are easier to spot. 
   * For example, among the top 100 runners, female runners appear to run faster, the older they are, but for men, it's the reverse. (X: age, Y: elapsed time, limit to rank: 100, enable smoother).
-  * Since there are few women in this subset of the data, the age thing is probably statistically meaningless.
 
 Summary and Future Work
 ========================================================
