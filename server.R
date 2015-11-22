@@ -111,6 +111,22 @@ function(input, output) {
     print(p)
 
   }, height=600)
+  output$url_table <- renderTable({
+      labels <- c(
+        "Presentation",
+        "Github"
+      )
+      urls <- c(
+        "https://aaronferrucci.github.io/ddp2015Project/",
+        "https://github.com/aaronferrucci/ddp2015Project"
+      )
+      references <- paste0(
+        labels, ": ", 
+        "<a href='",  urls, "' target='_blank'>",
+        urls, "</a>")
 
+      data.frame(references)
+
+    }, sanitize.text.function = function(x) x)
 }
 

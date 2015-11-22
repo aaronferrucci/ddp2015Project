@@ -14,8 +14,8 @@ useful_names = c(
 
 fluidPage(
   titlePanel("Wharf to Wharf 2015 Explorer"),
-  # Sidebar with a slider input for the number of bins
   sidebarLayout(
+    # Widgets
     sidebarPanel(
       selectInput('y', 'Y', useful_names, "elapsed"),
       selectInput('x', 'X', useful_names, "age"),
@@ -34,9 +34,9 @@ fluidPage(
       checkboxInput('jitter', 'Enable Jitter', FALSE)
     ),
 
-    # Show a plot of the generated distribution
     mainPanel(
       tabsetPanel(
+        # Documentation panel
         tabPanel(
           "README",
           fluidRow(
@@ -65,13 +65,20 @@ fluidPage(
               ",
               br(),
               br(),
-              "The controls also have a couple of checkboxes: 'Enable Smoother'
-              shows trend lines, which can clarify the direction the data is
-              going; 'Enable Jitter' is helpful when an axis shows a factor
-              variable (sex, country)."
+              "The 'Enable Smoother' checkbox adds trend lines to the plot;
+              the 'Enable Jitter' checkbox is helpful when an axis shows a 
+              factor variable (sex, country)."
             )
+          ),
+          fluidRow(
+            br(),
+            column(8, offset=2,
+              tableOutput("url_table")
+            ),
+            br()
           )
         ),
+        # Plot panel
         tabPanel("Data Exploration", 
           br(),
           column(12, plotOutput('plot'))
