@@ -87,11 +87,13 @@ num_runners <- nrow(dataset)
 ```
 * The [Wharf to Wharf Race](http://www.wharftowharf.com/) is a 6-mile foot race that occurs every summer in Santa Cruz, California
 
-* `r num_runners` runners participated in the 2015 Wharf to Wharf race, and the results are online, but only in a [rather inconvenient  form](http://results.xacte.com/?kw=wtw).
+* More than `r sprintf("%d", signif(num_runners - 500, 2))` runners participated in the 2015 Wharf to Wharf race, and you can look up the results online, but only  [one runner at a time](http://results.xacte.com/?kw=wtw).
 
-* If you were curious about the distribution of runner elapsed time, as a function of age and sex, you were out of luck... until now.
+* Seeing an overall picture of the race data, like the distribution of runner elapsed time, as a function of age and sex, was difficult... until now.
 
-* The Wharf to Wharf 2015 Explorer enables easy exploration of the data, in one handy chart. The app is available now: https://aaronferrucci.shinyapps.io/w2w2015
+* The Wharf to Wharf 2015 Explorer enables easy exploration of the data, in one handy chart.
+
+* The app is available now: https://aaronferrucci.shinyapps.io/w2w2015
 
 You control the X, you control the Y. Also color.
 ========================================================
